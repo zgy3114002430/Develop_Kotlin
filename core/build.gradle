@@ -1,0 +1,47 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+def dependency = rootProject.ext.dependences
+def config = rootProject.ext.android
+android {
+    compileSdkVersion config.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //kotlin
+    api dependency.kotlin
+    //androidx
+    api dependency.appcompat
+    api dependency.core
+    //test
+    testApi dependency.junit
+    androidTestApi dependency.testExt
+    androidTestApi dependency.testEspresso
+    //RXJava
+    api dependency.rxJava
+    api dependency.rxAndroid
+    api files('libs/platform_sdk_v2.4.0810.jar')
+    //retroft
+    api dependency.okHttp
+    api dependency.converter
+    api dependency.retrofit
+    api dependency.okhttpLoggingInterceptor
+    api dependency.rxAdapter
+}

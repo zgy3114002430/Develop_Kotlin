@@ -1,0 +1,2 @@
+include ':app', ':core'
+rootProject.name='Develop_Kotlin'
